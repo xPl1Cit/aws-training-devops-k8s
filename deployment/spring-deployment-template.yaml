@@ -19,7 +19,7 @@ spec:
        ver: {{VERSION_TAG}}
    spec:
      containers:
-     - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-spring-{{ENV}}:{{VERSION_TAG}}
+     - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-spring-{{ENVIRONMENT}}:{{VERSION_TAG}}
        name: spring
        resources:
         requests:

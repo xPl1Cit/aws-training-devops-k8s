@@ -40,7 +40,6 @@ process_template() {
   sed -i "s|{{ENVIRONMENT}}|$ENVIRONMENT|g" "$TARGET"
 }
 
-aws eks update-kubeconfig --region $REGION --name eks-cluster-capstone-al-$ENVIRONMENT
 # Deploy based on APP_SELECTION
 case "$APP_SELECTION" in
   spring)

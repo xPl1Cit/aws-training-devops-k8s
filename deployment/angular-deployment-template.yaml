@@ -19,7 +19,7 @@ spec:
        ver: {{VERSION_TAG}}
    spec:
      containers:
-     - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-angular-{{ENV}}:{{VERSION_TAG}}
+     - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-angular-{{ENVIRONMENT}}:{{VERSION_TAG}}
        name: angular
        resources:
         requests:

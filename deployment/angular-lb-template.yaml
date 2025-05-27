@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+ labels:
+   app: angular-lb
+ name: angular-lb
+spec:
+ ports:
+ - port: 80
+   protocol: TCP
+   targetPort: 80
+ selector:
+   app: angular
+   color: {{DEPLOYMENT_COLOR}}
+   ver: {{VERSION_TAG}}
+ type: LoadBalancer

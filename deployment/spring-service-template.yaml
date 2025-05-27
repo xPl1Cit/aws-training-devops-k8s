@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+ labels:
+   app: spring-service
+ name: spring-service
+spec:
+ ports:
+ - port: 8080
+   protocol: TCP
+   targetPort: 8080
+ selector:
+   app: spring
+   color: {{DEPLOYMENT_COLOR}}
+   ver: {{VERSION_TAG}}
+ type: ClusterIP

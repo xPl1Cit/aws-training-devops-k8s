@@ -40,8 +40,9 @@ addons:
  
 managedNodeGroups:
   - name: nodegroup-al-1
-    instanceType: t3.medium
+    instanceTypes: ["t2.medium","t2.large"]
     minSize: 2
+    spot: true
     desiredCapacity: 3
     maxSize: 4
     volumeEncrypted: true

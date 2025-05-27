@@ -3,6 +3,8 @@
 # Input arguments
 VERSION="${1:-latest}"
 DEPLOYMENT_COLOR="${2:-blue}"
+REGION="$(3:-us-east-1)"
+ENV="$(4:-test)"
 
 echo "Using image version: $VERSION"
 echo "Deploying to $DEPLOYMENT_COLOR version"
@@ -24,6 +26,7 @@ done
 
 # Deploy service
 echo "Deploying Services..."
+aws eks update-kubeconfig --region $REGION --name eks-cluster-capstone-al-$ENV
 kubectl apply -f "$SERVICE_CONFIG"
 kubectl apply -f "$LB_CONFIG"
 

@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# Input arguments
+# Input arguments with defaults
 REGION="${1:-us-east-1}"
 VERSION="${2:-latest}"
 DEPLOYMENT_COLOR="${3:-blue}"
+ENVIRONMENT="${4:-test}"
+APP_SELECTION="${5:-both}"
 
 echo "Using region: $REGION"
 echo "Using image version: $VERSION"
 echo "Deploying $DEPLOYMENT_COLOR version"
+echo "Environment: $ENVIRONMENT"
+echo "Application selection: $APP_SELECTION"
 
 # Get AWS Account ID
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -24,22 +28,41 @@ ANGULAR_CONFIG="$SCRIPT_DIR/deployment/angular-deployment.yaml"
 SPRING_TEMPLATE="$SCRIPT_DIR/deployment/spring-deployment-template.yaml"
 SPRING_CONFIG="$SCRIPT_DIR/deployment/spring-deployment.yaml"
 
-# Replace placeholders in deployment templates
-for TEMPLATE in "$ANGULAR_TEMPLATE" "$SPRING_TEMPLATE"; do
-  TARGET_FILE="${TEMPLATE/-template/}"
-  cp "$TEMPLATE" "$TARGET_FILE"
-  sed -i "s|{{REGION}}|$REGION|g" "$TARGET_FILE"
-  sed -i "s|{{AWS_ACCOUNT_ID}}|$ACCOUNT_ID|g" "$TARGET_FILE"
-  sed -i "s|{{VERSION_TAG}}|$VERSION|g" "$TARGET_FILE"
-  sed -i "s|{{DEPLOYMENT_COLOR}}|$DEPLOYMENT_COLOR|g" "$TARGET_FILE"
-done
+# Function to process template
+process_template() {
+  local TEMPLATE=$1
+  local TARGET=$2
+  cp "$TEMPLATE" "$TARGET"
+  sed -i "s|{{REGION}}|$REGION|g" "$TARGET"
+  sed -i "s|{{AWS_ACCOUNT_ID}}|$ACCOUNT_ID|g" "$TARGET"
+  sed -i "s|{{VERSION_TAG}}|$VERSION|g" "$TARGET"
+  sed -i "s|{{DEPLOYMENT_COLOR}}|$DEPLOYMENT_COLOR|g" "$TARGET"
+  sed -i "s|{{ENVIRONMENT}}|$ENVIRONMENT|g" "$TARGET"
+}
 
-# Deploy both pods
-echo "Deploying Angular and Spring pods..."
-kubectl apply -f "$ANGULAR_CONFIG"
-kubectl apply -f "$SPRING_CONFIG"
-
-# Clean up deployment configs
-rm "$ANGULAR_CONFIG" "$SPRING_CONFIG"
+aws eks update-kubeconfig --region $REGION --name eks-cluster-capstone-al-$ENVIRONMENT
+# Deploy based on APP_SELECTION
+case "$APP_SELECTION" in
+  spring)
+    echo "Deploying only Spring pod..."
+    process_template "$SPRING_TEMPLATE" "$SPRING_CONFIG"
+    kubectl apply -f "$SPRING_CONFIG"
+    rm "$SPRING_CONFIG"
+    ;;
+  angular)
+    echo "Deploying only Angular pod..."
+    process_template "$ANGULAR_TEMPLATE" "$ANGULAR_CONFIG"
+    kubectl apply -f "$ANGULAR_CONFIG"
+    rm "$ANGULAR_CONFIG"
+    ;;
+  *)
+    echo "Deploying both Angular and Spring pods..."
+    process_template "$ANGULAR_TEMPLATE" "$ANGULAR_CONFIG"
+    process_template "$SPRING_TEMPLATE" "$SPRING_CONFIG"
+    kubectl apply -f "$ANGULAR_CONFIG"
+    kubectl apply -f "$SPRING_CONFIG"
+    rm "$ANGULAR_CONFIG" "$SPRING_CONFIG"
+    ;;
+esac
 
 echo "Pod Deployment complete."

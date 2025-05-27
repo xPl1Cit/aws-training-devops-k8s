@@ -9,15 +9,25 @@ else
   echo "Using region: $REGION"
 fi
 
+# Check if region is passed as an argument
+if [ -z "$2" ]; then
+  echo "Environment not provided. Using default environment: test"
+  ENV="test"  # Default to test if no environment is provided
+else
+  ENV=$2
+  echo "Using environment: $ENV"
+fi
+
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 echo "Script directory is: $SCRIPT_DIR"
 # Replace the region placeholder in the config template with the actual region
 CONFIG_FILE="$SCRIPT_DIR/cluster/cluster-config.yaml"
 cp "$SCRIPT_DIR/cluster/cluster-config-template.yaml" "$CONFIG_FILE"
 sed -i "s/{{REGION}}/$REGION/g" "$CONFIG_FILE"
+sed -i "s/{{ENV}}/$ENV/g" "$CONFIG_FILE"
 
 # Apply the eksctl configuration
-echo "Creating EKS Cluster in region $REGION..."
+echo "Creating EKS Cluster ($ENV) in region $REGION..."
 eksctl create cluster -f "$CONFIG_FILE"
 
 # Clean up the temporary config file

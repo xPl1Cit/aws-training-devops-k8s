@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # Input arguments
-VERSION="${1:-latest}"
-DEPLOYMENT_COLOR="${2:-blue}"
+DEPLOYMENT_COLOR="${1:-blue}"
 
-echo "Using image version: $VERSION"
 echo "Deploying to $DEPLOYMENT_COLOR version"
 
 # Script and template paths
@@ -18,7 +16,6 @@ LB_CONFIG="$SCRIPT_DIR/deployment/angular-lb.yaml"
 for TEMPLATE in "$SERVICE_TEMPLATE" "$LB_TEMPLATE"; do
   TARGET_FILE="${TEMPLATE/-template/}"
   cp "$TEMPLATE" "$TARGET_FILE"
-  sed -i "s|{{VERSION_TAG}}|$VERSION|g" "$TARGET_FILE"
   sed -i "s|{{DEPLOYMENT_COLOR}}|$DEPLOYMENT_COLOR|g" "$TARGET_FILE"
 done
 

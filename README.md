@@ -24,7 +24,7 @@ ID: github-token
 3. Pipelines:
 We will need to setup a total of 9 pipelines to complete your Jenkins setup. Please create a new Item for each and follow the instructions on how to create each
 
-- Pipeline 1
+Pipeline 1
 - Name: Build Angular
 - Type: Multibranch Pipeline
 - Display Name: Build Angular
@@ -42,139 +42,139 @@ We will need to setup a total of 9 pipelines to complete your Jenkins setup. Ple
 
 
 Pipeline 2
-Name: Build Spring
-Type: Multibranch Pipeline
-Display Name: Build Spring
-Description (optional): This pipeline is used to build the SpringBoot application backend
-Branch Sources:
-  Credentials: Use the Github-token
-  Repository-URL: https://github.com/xPl1Cit/aws-training-devops-spring.git
-  Add "File by name (with wildcards)": "test prod"
-Build Configuration:
-  Mode: By Jenkinsfile
-  Path: "Jenkinsfile"
-Orphaned Item Strategy
-  Discard old items: true
-    max# of items to keep: 10
+- Name: Build Spring
+- Type: Multibranch Pipeline
+- Display Name: Build Spring
+- Description (optional): This pipeline is used to build the SpringBoot application backend
+- Branch Sources:
+  - Credentials: Use the Github-token
+  - Repository-URL: https://github.com/xPl1Cit/aws-training-devops-spring.git
+  - Add "File by name (with wildcards)": "test prod"
+- Build Configuration:
+  - Mode: By Jenkinsfile
+  - Path: "Jenkinsfile"
+- Orphaned Item Strategy
+  - Discard old items: true
+    - max# of items to keep: 10
 
 
 Pipeline 3
-Name: Deploy Angular
-Type: Pipeline
-Display Name: Deploy Angular
-Description (optional): This pipeline is used to deploy the Frontend Angular application
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/Angular.Jenkinsfile"
+- Name: Deploy Angular
+- Type: Pipeline
+- Display Name: Deploy Angular
+- Description (optional): This pipeline is used to deploy the Frontend Angular application
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/Angular.Jenkinsfile"
 
 
 Pipeline 4
-Name: Deploy Database
-Type: Pipeline
-Display Name: Deploy Database
-Description (optional): This pipeline is used to deploy the PostgreSQL database for the application
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/Database.Jenkinsfile"
+- Name: Deploy Database
+- Type: Pipeline
+- Display Name: Deploy Database
+- Description (optional): This pipeline is used to deploy the PostgreSQL database for the application
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/Database.Jenkinsfile"
 
 
 Pipeline 5
-Name: Deploy Metrics
-Type: Pipeline
-Display Name: Deploy Metrics
-Description (optional): This pipeline is used to deploy the metrics in form of Grafana and Prometheus
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/Metrics.Jenkinsfile"
+- Name: Deploy Metrics
+- Type: Pipeline
+- Display Name: Deploy Metrics
+- Description (optional): This pipeline is used to deploy the metrics in form of Grafana and Prometheus
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/Metrics.Jenkinsfile"
 
 
 Pipeline 6
-Name: Deploy Services
-Type: Pipeline
-Display Name: Deploy Services
-Description (optional): This pipeline is used to deploy the necessary services for the pods to connect and be exposed
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/Services.Jenkinsfile"
+- Name: Deploy Services
+- Type: Pipeline
+- Display Name: Deploy Services
+- Description (optional): This pipeline is used to deploy the necessary services for the pods to connect and be exposed
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/Services.Jenkinsfile"
 
 
 Pipeline 7
-Name: Deploy Spring
-Type: Pipeline
-Display Name: Deploy Spring
-Description (optional): This pipeline is used to deploy the SpringBoot application backend
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/Spring.Jenkinsfile"
+- Name: Deploy Spring
+- Type: Pipeline
+- Display Name: Deploy Spring
+- Description (optional): This pipeline is used to deploy the SpringBoot application backend
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/Spring.Jenkinsfile"
 
 
 Pipeline 8
-Name: Deploy K8S
-Type: Pipeline
-Display Name: Deploy K8S
-Description (optional): This pipeline is used to deploy the Kubernetes Cluster and deploy the application to be ready to use
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/K8S-Deploy.Jenkinsfile"
+- Name: Deploy K8S
+- Type: Pipeline
+- Display Name: Deploy K8S
+- Description (optional): This pipeline is used to deploy the Kubernetes Cluster and deploy the application to be ready to use
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/K8S-Deploy.Jenkinsfile"
 
 
 Pipeline 8
-Name: Teardown K8S
-Type: Pipeline
-Display Name: Teardown K8S
-Description (optional): This pipeline is used to teardown the Kubernetes cluster used for the application
-GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
-Pipeline:
-  Definition: Pipeline script from SCM
-  SCM: Git
-    Repositories:
-      Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
-      Credentials: Use the Github-token
-    Branches to build: "main"
-  Script path: "jenkins/K8S-Teardown.Jenkinsfile"
+- Name: Teardown K8S
+- Type: Pipeline
+- Display Name: Teardown K8S
+- Description (optional): This pipeline is used to teardown the Kubernetes cluster used for the application
+- GitHub project URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+- This project is parameterized: true (will be populated on first retrieval of Jenkinsfile)
+- Pipeline:
+  - Definition: Pipeline script from SCM
+  - SCM: Git
+    - Repositories:
+      - Repository URL: https://github.com/xPl1Cit/aws-training-devops-k8s/
+      - Credentials: Use the Github-token
+    - Branches to build: "main"
+  - Script path: "jenkins/K8S-Teardown.Jenkinsfile"
 
 
 Make sure that the names and Display names all match as they are crossreferences between pipelines.

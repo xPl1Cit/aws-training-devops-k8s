@@ -1,0 +1,15 @@
+prometheus:
+  prometheusSpec:
+    maximumStartupDurationSeconds: 120
+    additionalScrapeConfigs:
+      - job_name: 'spring-boot'
+        metrics_path: /actuator/prometheus
+        scrape_interval: 15s
+        static_configs:
+          - targets: ['spring-service.default.svc.cluster.local:8080']
+  service:
+   type: LoadBalancer
+
+grafana:
+  service:
+    type: LoadBalancer

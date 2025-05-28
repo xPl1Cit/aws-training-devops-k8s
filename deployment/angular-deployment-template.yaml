@@ -10,13 +10,11 @@ spec:
    matchLabels:
      app: angular
      color: {{DEPLOYMENT_COLOR}}
-     ver: {{VERSION_TAG}}
  template:
    metadata:
      labels:
        app: angular
        color: {{DEPLOYMENT_COLOR}}
-       ver: {{VERSION_TAG}}
    spec:
      containers:
      - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-angular-{{ENVIRONMENT}}:{{VERSION_TAG}}

@@ -10,13 +10,11 @@ spec:
    matchLabels:
      app: spring
      color: {{DEPLOYMENT_COLOR}}
-     ver: {{VERSION_TAG}}
  template:
    metadata:
      labels:
        app: spring
        color: {{DEPLOYMENT_COLOR}}
-       ver: {{VERSION_TAG}}
    spec:
      containers:
      - image: {{AWS_ACCOUNT_ID}}.dkr.ecr.{{REGION}}.amazonaws.com/capstone-al-spring-{{ENVIRONMENT}}:{{VERSION_TAG}}

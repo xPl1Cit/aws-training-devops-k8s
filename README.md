@@ -3,26 +3,26 @@ Welcome to the Kubernetes (K8S) repository. This repository contains all the nec
 Please follow the following instructions:
 
 1. Setup:
-When first opening the Jenkins UI, you will be asked to create an Admin account, please do so and note your user information in a Password manager
+- When first opening the Jenkins UI, you will be asked to create an Admin account, please do so and note your user information in a Password manager
 2. Credentials:
-2.1. Make sure to insert both your GitHub account and AWS CLI access token inside Jenkins
-2.2. In Jenkins please follow "Dashboard" -> "Manage Jenkins" -> "Credentials" -> "Global" -> "Add Credentials"
-2.3. We will need two entries of the "Username with password" kind:
+- Make sure to insert both your GitHub account and AWS CLI access token inside Jenkins
+- In Jenkins please follow "Dashboard" -> "Manage Jenkins" -> "Credentials" -> "Global" -> "Add Credentials"
+- We will need two entries of the "Username with password" kind:
 
-Scope: Global
-Username: {Your AWS access key ID}
-Password: {Your AWS access secret}
-Treat username as secret: recommended yes
-ID: aws-credentials
+- Scope: Global
+- Username: {Your AWS access key ID}
+- Password: {Your AWS access secret}
+- Treat username as secret: recommended yes
+- ID: aws-credentials
 
-Scope: Global
-Username: xPliC1t
-Password: {Will be provided by Andreas}
-Treat username as secret: recommended yes
-ID: github-token
+- Scope: Global
+- Username: xPliC1t
+- Password: {Will be provided by Andreas}
+- Treat username as secret: recommended yes
+- ID: github-token
 
 3. Pipelines:
-We will need to setup a total of 9 pipelines to complete your Jenkins setup. Please create a new Item for each and follow the instructions on how to create each
+- We will need to setup a total of 9 pipelines to complete your Jenkins setup. Please create a new Item for each and follow the instructions on how to create each
 
 Pipeline 1
 - Name: Build Angular

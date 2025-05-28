@@ -183,22 +183,22 @@ When you have setup all the pipelines, be sure to run them all once to retrieve 
 CAUTION: This will fail the script for the first run.
 
 4. Build Nodes
-Make sure to extend the concurrent possible build from 2 to something like 5 to allow multiple environments to be created and torn down at the same time
-Go to "Dashboard" -> "Build Executor Status" -> Click on Settiings wheel for "Built-In Node" -> Number of executor: 5
+- Make sure to extend the concurrent possible build from 2 to something like 5 to allow multiple environments to be created and torn down at the same time
+- Go to "Dashboard" -> "Build Executor Status" -> Click on Settiings wheel for "Built-In Node" -> Number of executor: 5
 
 5. Build Kubernetes cluster
-Before building the Kubernetes cluster, be sure to run the Build Angular and Build Spring pipeline at least once successfully for the region and environment (test and prod) you want to deploy.
-When you successfully build the images and stored them into ECR, do not be confused, the deployment Pipelines for Angular and Spring will run and fail. This is not of any concern however.
-When the images are available you can utilize the Deploy K8S pipeline to deploy the Kubernetes cluster, services, database, Angular, SpringBoot and Grafana. This will take a considerable amount of time. So please be patient.
+- Before building the Kubernetes cluster, be sure to run the Build Angular and Build Spring pipeline at least once successfully for the region and environment (test and prod) you want to deploy.
+- When you successfully build the images and stored them into ECR, do not be confused, the deployment Pipelines for Angular and Spring will run and fail. This is not of any concern however.
+- When the images are available you can utilize the Deploy K8S pipeline to deploy the Kubernetes cluster, services, database, Angular, SpringBoot and Grafana. This will take a considerable amount of time. So please be patient.
 
 6. Accessing the frontends
-To access the application open the AWS console and navigate "Amazon Elastic Kubernetes Service" -> "Clusters" -> "{The cluster you deployed}" -> "Resources" -> "Service and networking" -> "Services"
-Here you will find a list of services that are running inside the Kubernetes cluster. There should be two Load Balancer services running "angular-lb" and "prometheus-grafana"
-Inside these Load Balancers you will find the URLs to access both the Angular frontend as well as the Grafana Dashboards to monitor the Kubernetes cluster.
-Be careful when clicking the links as they will most likely redirect you to https which is not available. Instead change it to http. Both application use Port 80, so you wont have to specify a specific port when using a standard browser.
+- To access the application open the AWS console and navigate "Amazon Elastic Kubernetes Service" -> "Clusters" -> "{The cluster you deployed}" -> "Resources" -> "Service and networking" -> "Services"
+- Here you will find a list of services that are running inside the Kubernetes cluster. There should be two Load Balancer services running "angular-lb" and "prometheus-grafana"
+- Inside these Load Balancers you will find the URLs to access both the Angular frontend as well as the Grafana Dashboards to monitor the Kubernetes cluster.
+- Be careful when clicking the links as they will most likely redirect you to https which is not available. Instead change it to http. Both application use Port 80, so you wont have to specify a specific port when using a standard browser.
 
 7. Bonus: Monitoring SpringBoot Metrics
-When accessing the Grafana frontend it will have all Kubernetes related dashboards available by default.
-To add the SpringBoot Dashboard please navigate -> "Dashboards" -> "New" -> "Import" -> Find and import dashboards: "4701" -> "Load" -> Prometheus: Select the Prometheus instance -> "Import"
-Then you will have a Dashboard "JVM (Micrometer)" available to use.
-NOTE: It might take a couple of minutes to actually populate the relevant data. 
+- When accessing the Grafana frontend it will have all Kubernetes related dashboards available by default.
+- To add the SpringBoot Dashboard please navigate -> "Dashboards" -> "New" -> "Import" -> Find and import dashboards: "4701" -> "Load" -> Prometheus: Select the Prometheus instance -> "Import"
+- Then you will have a Dashboard "JVM (Micrometer)" available to use.
+- NOTE: It might take a couple of minutes to actually populate the relevant data. 

@@ -12,5 +12,4 @@ spec:
  selector:
    app: spring
    color: {{DEPLOYMENT_COLOR}}
-   ver: {{VERSION_TAG}}
  type: ClusterIP

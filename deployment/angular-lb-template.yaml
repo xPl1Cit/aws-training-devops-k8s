@@ -12,5 +12,4 @@ spec:
  selector:
    app: angular
    color: {{DEPLOYMENT_COLOR}}
-   ver: {{VERSION_TAG}}
  type: LoadBalancer

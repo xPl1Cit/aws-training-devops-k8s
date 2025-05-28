@@ -4,6 +4,7 @@
 REGION="${1:-us-east-1}"
 VERSION="${2:-latest}"
 DEPLOYMENT_COLOR="${3:-blue}"
+ENVIRONMENT="${4:-test}"
 
 echo "Using region: $REGION"
 echo "Using image version: $VERSION"
@@ -31,6 +32,7 @@ for TEMPLATE in "$ANGULAR_TEMPLATE" "$SPRING_TEMPLATE"; do
   sed -i "s|{{AWS_ACCOUNT_ID}}|$ACCOUNT_ID|g" "$TARGET_FILE"
   sed -i "s|{{VERSION_TAG}}|$VERSION|g" "$TARGET_FILE"
   sed -i "s|{{DEPLOYMENT_COLOR}}|$DEPLOYMENT_COLOR|g" "$TARGET_FILE"
+  sed -i "s|{{ENVIRONMENT}}|$ENVIRONMENT|g" "$TARGET_FILE"
 done
 
 # Deploy both pods

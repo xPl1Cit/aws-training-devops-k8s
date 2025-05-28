@@ -24,21 +24,21 @@ ID: github-token
 3. Pipelines:
 We will need to setup a total of 9 pipelines to complete your Jenkins setup. Please create a new Item for each and follow the instructions on how to create each
 
-Pipeline 1
-Name: Build Angular
-Type: Multibranch Pipeline
-Display Name: Build Angular
-Description (optional): This pipeline is used to build the Frontend Angular application
-Branch Sources:
-  Credentials: Use the Github-token
-  Repository-URL: https://github.com/xPl1Cit/aws-training-devops-angular.git
-  Add "File by name (with wildcards)": "test prod"
-Build Configuration:
-  Mode: By Jenkinsfile
-  Path: "Jenkinsfile"
-Orphaned Item Strategy
-  Discard old items: true
-    max# of items to keep: 10
+- Pipeline 1
+- Name: Build Angular
+- Type: Multibranch Pipeline
+- Display Name: Build Angular
+- Description (optional): This pipeline is used to build the Frontend Angular application
+- Branch Sources:
+  - Credentials: Use the Github-token
+  - Repository-URL: https://github.com/xPl1Cit/aws-training-devops-angular.git
+  - Add "File by name (with wildcards)": "test prod"
+-  Build Configuration:
+  - Mode: By Jenkinsfile
+  - Path: "Jenkinsfile"
+- Orphaned Item Strategy
+  - Discard old items: true
+    - max# of items to keep: 10
 
 
 Pipeline 2
